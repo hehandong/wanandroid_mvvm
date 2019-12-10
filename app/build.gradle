@@ -21,13 +21,18 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.navigation:navigation-fragment:2.1.0'
-    implementation 'androidx.navigation:navigation-ui:2.1.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation "androidx.appcompat:appcompat:$rootProject.version_appcompat"
+    implementation "com.google.android.material:material:$rootProject.version_support"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.version_constraintlayout"
+    implementation "androidx.navigation:navigation-fragment:$rootProject.version_navigation"
+    implementation "androidx.navigation:navigation-ui:$rootProject.version_navigation"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.version_lifecycle"
+    implementation "androidx.legacy:legacy-support-v4:$rootProject.version_support"
+
+    testImplementation "junit:junit:$rootProject.version_junit"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.version_ext_junit"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.version_espresso"
+
+
 }

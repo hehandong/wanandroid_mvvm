@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':retrofithelper'
 rootProject.name='WanAndroid_mvvm'

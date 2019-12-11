@@ -3,4 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="comment_light_background">#d6d6d6</color>
+    <color name="cardview_light_background">#FFFFFFFF</color>
+
+    <color name="bg">#F0F0F0</color>
 </resources>

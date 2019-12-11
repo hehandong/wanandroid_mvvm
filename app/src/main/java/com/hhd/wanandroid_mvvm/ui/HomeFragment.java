@@ -7,10 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hhd.wanandroid_mvvm.R;
-import com.hhd.wanandroid_mvvm.databinding.FragmentProductBinding;
+import com.hhd.wanandroid_mvvm.databinding.FragmentHomeBinding;
 import com.hhd.wanandroid_mvvm.db.entity.ProductEntity;
 import com.hhd.wanandroid_mvvm.model.Product;
-import com.hhd.wanandroid_mvvm.viewmodel.ProductListViewModel;
+import com.hhd.wanandroid_mvvm.viewmodel.HomeViewModel;
 
 import java.util.List;
 
@@ -22,21 +22,26 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-public class ProductFragment extends Fragment {
+public class HomeFragment extends Fragment {
 
-    private ProductListViewModel mViewModel;
-    private FragmentProductBinding mBinding;
-    private ProductAdapter mProductAdapter;
+
+    public static HomeFragment newInstance() {
+        return new HomeFragment();
+    }
+
+    private HomeViewModel mViewModel;
+    private FragmentHomeBinding mBinding;
+    private HomeAdapter mHomeAdapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_product, container, false);
-        mViewModel = ViewModelProviders.of(this).get(ProductListViewModel.class);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
+        mViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
 
-        mProductAdapter = new ProductAdapter(mProductClickCallback);
-        mBinding.productsList.setAdapter(mProductAdapter);
+        mHomeAdapter = new HomeAdapter(mProductClickCallback);
+        mBinding.productsList.setAdapter(mHomeAdapter);
         subscribeUi(mViewModel.getProducts());
         return mBinding.getRoot();
     }
@@ -48,7 +53,7 @@ public class ProductFragment extends Fragment {
             public void onChanged(@Nullable List<ProductEntity> myProducts) {
                 if (myProducts != null) {
 //                    mBinding.setIsLoading(false);
-                    mProductAdapter.setProductList(myProducts);
+                    mHomeAdapter.setProductList(myProducts);
                 } else {
 //                    mBinding.setIsLoading(true);
                 }
@@ -70,6 +75,5 @@ public class ProductFragment extends Fragment {
             Log.i("ProductListFragment","mProductClickCallback");
         }
     };
-
 
 }

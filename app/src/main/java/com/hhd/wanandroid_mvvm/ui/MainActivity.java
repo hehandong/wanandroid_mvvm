@@ -1,9 +1,10 @@
-package com.hhd.wanandroid_mvvm;
+package com.hhd.wanandroid_mvvm.ui;
 
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
+import com.hhd.wanandroid_mvvm.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;

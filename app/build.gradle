@@ -36,6 +36,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.version_lifecycle"
     implementation "androidx.legacy:legacy-support-v4:$rootProject.version_support"
 
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     testImplementation "junit:junit:$rootProject.version_junit"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.version_ext_junit"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.version_espresso"

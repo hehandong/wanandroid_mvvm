@@ -16,102 +16,39 @@
 
 package com.hhd.wanandroid_mvvm.ui;
 
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.hhd.wanandroid_mvvm.R;
-import com.hhd.wanandroid_mvvm.databinding.ProductItemBinding;
-import com.hhd.wanandroid_mvvm.model.Product;
+import com.hhd.wanandroid_mvvm.model.ArticleBean;
 
-import java.util.List;
-import java.util.Objects;
-
-import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.RecyclerView;
-
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ProductViewHolder> {
-
-    List<? extends Product> mProductList;
-
-    @Nullable
-    private final ProductClickCallback mProductClickCallback;
-
-    public HomeAdapter(@Nullable ProductClickCallback clickCallback) {
-        mProductClickCallback = clickCallback;
-        setHasStableIds(true);
+public class HomeAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHolder> {
+    public HomeAdapter() {
+        super(R.layout.item_home2, null);
     }
 
-    public void setProductList(final List<? extends Product> productList) {
-        if (mProductList == null) {
-            mProductList = productList;
-            notifyItemRangeInserted(0, productList.size());
-        } else {
-            DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
-                @Override
-                public int getOldListSize() {
-                    return mProductList.size();
-                }
+    @Override
+    protected void convert(BaseViewHolder helper, ArticleBean item) {
+        if (item != null) {
+            helper.setText(R.id.tv_type, item.getChapterName());
+            helper.setText(R.id.tv_title, item.getTitle());
+            TextView contentTv = helper.getView(R.id.tv_content);
+            //item.getDesc()如果包含标记符<p>，显示出来不好看
+            if (TextUtils.isEmpty(item.getDesc()) || item.getDesc().contains("<p>")) {
+                contentTv.setVisibility(View.GONE);
+            } else {
+                contentTv.setVisibility(View.VISIBLE);
+                contentTv.setText(item.getDesc());
+            }
 
-                @Override
-                public int getNewListSize() {
-                    return productList.size();
-                }
+            helper.setText(R.id.tv_date, item.getNiceDate());
+            String author = App.getInstance().getString(R.string.author) + item.getAuthor();
+            helper.setText(R.id.tv_author, author);
 
-                @Override
-                public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-                    return mProductList.get(oldItemPosition).getId() ==
-                            productList.get(newItemPosition).getId();
-                }
-
-                @Override
-                public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    Product newProduct = productList.get(newItemPosition);
-                    Product oldProduct = mProductList.get(oldItemPosition);
-                    return newProduct.getId() == oldProduct.getId()
-                            && Objects.equals(newProduct.getDescription(), oldProduct.getDescription())
-                            && Objects.equals(newProduct.getName(), oldProduct.getName())
-                            && newProduct.getPrice() == oldProduct.getPrice();
-                }
-            });
-            mProductList = productList;
-            result.dispatchUpdatesTo(this);
         }
     }
 
-    @Override
-    public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ProductItemBinding binding = DataBindingUtil
-                .inflate(LayoutInflater.from(parent.getContext()), R.layout.product_item,
-                        parent, false);
-        binding.setCallback(mProductClickCallback);
-        return new ProductViewHolder(binding);
-    }
-
-    @Override
-    public void onBindViewHolder(ProductViewHolder holder, int position) {
-        holder.binding.setProduct(mProductList.get(position));
-        holder.binding.executePendingBindings();
-    }
-
-    @Override
-    public int getItemCount() {
-        return mProductList == null ? 0 : mProductList.size();
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return mProductList.get(position).getId();
-    }
-
-    static class ProductViewHolder extends RecyclerView.ViewHolder {
-
-        final ProductItemBinding binding;
-
-        public ProductViewHolder(ProductItemBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
-    }
 }

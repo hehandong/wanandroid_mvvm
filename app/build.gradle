@@ -9,6 +9,12 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -36,8 +42,16 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.version_lifecycle"
     implementation "androidx.legacy:legacy-support-v4:$rootProject.version_support"
 
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation "me.drakeet.support:toastcompat:$rootProject.version_toastcompat"
+    implementation "com.android.support:multidex:$rootProject.version_multidex"
+
+    implementation "com.tencent.bugly:crashreport:$rootProject.version_bugly_crashreport"
+    //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
+    implementation "com.tencent.bugly:nativecrashreport:$rootProject.version_bugly_nativecrashreport"
+    //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
+
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.47'
+
     testImplementation "junit:junit:$rootProject.version_junit"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.version_ext_junit"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.version_espresso"

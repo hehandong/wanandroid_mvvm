@@ -14,4 +14,8 @@
     <string name="cd_product_name">Name of the product</string>
     <string name="cd_search_products">Search products</string>
     <string name="product_price">Price: $%d</string>
+
+    <string name="action_share">分享</string>
+    <string name="hot_news">热门新闻</string>
+    <string name="author">作者:</string>
 </resources>

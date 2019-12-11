@@ -26,6 +26,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation project(':retrofithelper')
+
     implementation "androidx.appcompat:appcompat:$rootProject.version_appcompat"
     implementation "com.google.android.material:material:$rootProject.version_support"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.version_constraintlayout"

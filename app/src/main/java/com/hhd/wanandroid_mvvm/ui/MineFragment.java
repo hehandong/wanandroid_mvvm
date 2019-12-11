@@ -1,4 +1,4 @@
-package com.hhd.wanandroid_mvvm.ui.mine;
+package com.hhd.wanandroid_mvvm.ui;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hhd.wanandroid_mvvm.R;
+import com.hhd.wanandroid_mvvm.viewmodel.MineViewModel;
 
 public class MineFragment extends Fragment {
 

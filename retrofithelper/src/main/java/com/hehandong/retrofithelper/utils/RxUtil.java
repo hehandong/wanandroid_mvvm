@@ -1,13 +1,13 @@
 package com.hehandong.retrofithelper.utils;
 
-import android.support.v4.app.Fragment;
 
+import com.hehandong.retrofithelper.net.common.ProgressUtils;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.trello.rxlifecycle2.components.support.RxFragment;
-import com.hehandong.retrofithelper.net.common.ProgressUtils;
 
+import androidx.fragment.app.Fragment;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;

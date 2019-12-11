@@ -1,4 +1,4 @@
-package com.hhd.wanandroid_mvvm.ui.notifications;
+package com.hhd.wanandroid_mvvm.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.hhd.wanandroid_mvvm.R;
+import com.hhd.wanandroid_mvvm.viewmodel.NotificationsViewModel;
 
 public class NotificationsFragment extends Fragment {
 

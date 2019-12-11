@@ -1,7 +1,6 @@
 package com.hehandong.retrofithelper.net.common;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
 
 import com.hehandong.retrofithelper.dialog.DialogUtils;
 
@@ -20,7 +19,7 @@ import io.reactivex.functions.Consumer;
 
 public class ProgressUtils {
     public static <T> ObservableTransformer<T, T> applyProgressBar(
-            @NonNull final Activity activity, String msg) {
+             final Activity activity, String msg) {
         final WeakReference<Activity> activityWeakReference = new WeakReference<>(activity);
         final DialogUtils dialogUtils = new DialogUtils();
         dialogUtils.showProgress(activityWeakReference.get());
@@ -55,8 +54,7 @@ public class ProgressUtils {
         };
     }
 
-    public static <T> ObservableTransformer<T, T> applyProgressBar(
-            @NonNull final Activity activity) {
+    public static <T> ObservableTransformer<T, T> applyProgressBar(final Activity activity) {
         return applyProgressBar(activity, "");
     }
 }

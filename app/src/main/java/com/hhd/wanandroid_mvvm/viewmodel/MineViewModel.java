@@ -1,4 +1,4 @@
-package com.hhd.wanandroid_mvvm.ui.mine;
+package com.hhd.wanandroid_mvvm.viewmodel;
 
 import androidx.lifecycle.ViewModel;
 

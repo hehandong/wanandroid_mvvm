@@ -1,4 +1,4 @@
-package com.hhd.wanandroid_mvvm.ui.home;
+package com.hhd.wanandroid_mvvm.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

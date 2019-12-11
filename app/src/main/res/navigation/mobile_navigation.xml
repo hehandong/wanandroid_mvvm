@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.hhd.wanandroid_mvvm.ui.home.HomeFragment"
+        android:name="com.hhd.wanandroid_mvvm.ui.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.hhd.wanandroid_mvvm.ui.dashboard.DashboardFragment"
+        android:name="com.hhd.wanandroid_mvvm.ui.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.hhd.wanandroid_mvvm.ui.notifications.NotificationsFragment"
+        android:name="com.hhd.wanandroid_mvvm.ui.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 
     <fragment
         android:id="@+id/navigation_mine"
-        android:name="com.hhd.wanandroid_mvvm.ui.mine.MineFragment"
+        android:name="com.hhd.wanandroid_mvvm.ui.MineFragment"
         android:label="@string/title_mine"
         tools:layout="@layout/fragment_mine" />
 </navigation>

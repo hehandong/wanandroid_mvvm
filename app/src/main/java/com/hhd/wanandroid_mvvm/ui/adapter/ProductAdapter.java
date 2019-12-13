@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hhd.wanandroid_mvvm.ui;
+package com.hhd.wanandroid_mvvm.ui.adapter;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import com.hhd.wanandroid_mvvm.R;
 import com.hhd.wanandroid_mvvm.databinding.ProductItemBinding;
 import com.hhd.wanandroid_mvvm.model.Product;
+import com.hhd.wanandroid_mvvm.ui.ProductClickCallback;
 
 import java.util.List;
 import java.util.Objects;

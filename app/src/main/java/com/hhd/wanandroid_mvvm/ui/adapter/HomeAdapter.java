@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hhd.wanandroid_mvvm.ui;
+package com.hhd.wanandroid_mvvm.ui.adapter;
 
 import android.text.TextUtils;
 import android.view.View;
@@ -24,6 +24,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.hhd.wanandroid_mvvm.R;
 import com.hhd.wanandroid_mvvm.model.ArticleBean;
+import com.hhd.wanandroid_mvvm.ui.App;
 
 public class HomeAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHolder> {
     public HomeAdapter() {
@@ -47,7 +48,6 @@ public class HomeAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHolder> {
             helper.setText(R.id.tv_date, item.getNiceDate());
             String author = App.getInstance().getString(R.string.author) + item.getAuthor();
             helper.setText(R.id.tv_author, author);
-
         }
     }
 

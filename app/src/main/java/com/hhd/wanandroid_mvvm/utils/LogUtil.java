@@ -11,7 +11,7 @@ public class LogUtil {
     //true:打印日志
     public static boolean DEBUG = true;
 
-    public static String TAG = "Login";
+    public static String TAG = "LogUtil";
 
     public static void v(String msg) {
         if (DEBUG) {

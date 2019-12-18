@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hhd.wanandroid_mvvm.ui;
+package com.hhd.wanandroid_mvvm.ui.adapter;
 
 import android.view.View;
 

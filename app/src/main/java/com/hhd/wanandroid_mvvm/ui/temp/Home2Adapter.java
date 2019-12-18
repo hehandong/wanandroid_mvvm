@@ -1,5 +1,20 @@
-package com.hhd.wanandroid_mvvm.ui.diffUtil;
+/*
+ * Copyright 2017, The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.hhd.wanandroid_mvvm.ui.temp;
 
 import android.text.TextUtils;
 import android.view.View;
@@ -11,24 +26,13 @@ import com.hhd.wanandroid_mvvm.R;
 import com.hhd.wanandroid_mvvm.model.ArticleBean;
 import com.hhd.wanandroid_mvvm.ui.App;
 
-import java.util.List;
-
-import androidx.annotation.NonNull;
-
-/**
- * Create adapter
- */
-public class HomeDiffAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHolder> {
-    public static final int TITLE_PAYLOAD = 899;
-    public static final int CONTENT_PAYLOAD = 900;
-    public static final int ITEM_0_PAYLOAD = 901;
-
-    public HomeDiffAdapter() {
+public class Home2Adapter extends BaseQuickAdapter<ArticleBean, BaseViewHolder> {
+    public Home2Adapter() {
         super(R.layout.item_home2, null);
     }
 
     @Override
-    protected void convert(@NonNull BaseViewHolder helper, ArticleBean item) {
+    protected void convert(BaseViewHolder helper, ArticleBean item) {
         if (item != null) {
             helper.setText(R.id.tv_type, item.getChapterName());
             helper.setText(R.id.tv_title, item.getTitle());
@@ -47,26 +51,4 @@ public class HomeDiffAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHolde
         }
     }
 
-    /**
-     * This method will only be executed when there is payload info
-     *
-     * 当有 payload info 时，只会执行此方法
-     *
-     * @param helper   A fully initialized helper.
-     * @param item     The item that needs to be displayed.
-     * @param payloads payload info.
-     */
-    @Override
-    protected void convertPayloads(@NonNull BaseViewHolder helper, ArticleBean item, @NonNull List<Object> payloads) {
-//        for (Object p : payloads) {
-//            int payload = (int) p;
-//            if (payload == TITLE_PAYLOAD) {
-//
-//            } else if (payload == CONTENT_PAYLOAD) {
-//
-//            } else if (payload == ITEM_0_PAYLOAD) {
-//
-//            }
-//        }
-    }
 }

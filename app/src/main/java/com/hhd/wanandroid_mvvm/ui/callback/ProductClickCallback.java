@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hhd.wanandroid_mvvm.ui;
+package com.hhd.wanandroid_mvvm.ui.callback;
 
 
 import com.hhd.wanandroid_mvvm.model.Product;

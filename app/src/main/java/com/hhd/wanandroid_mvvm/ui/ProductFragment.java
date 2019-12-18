@@ -11,6 +11,7 @@ import com.hhd.wanandroid_mvvm.databinding.FragmentProductBinding;
 import com.hhd.wanandroid_mvvm.db.entity.ProductEntity;
 import com.hhd.wanandroid_mvvm.model.Product;
 import com.hhd.wanandroid_mvvm.ui.adapter.ProductAdapter;
+import com.hhd.wanandroid_mvvm.ui.callback.ProductClickCallback;
 import com.hhd.wanandroid_mvvm.viewmodel.ProductListViewModel;
 
 import java.util.List;

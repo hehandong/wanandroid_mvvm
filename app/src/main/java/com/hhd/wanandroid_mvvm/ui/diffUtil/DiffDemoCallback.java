@@ -43,9 +43,7 @@ public class DiffDemoCallback extends BaseQuickDiffCallback<ArticleBean> {
      */
     @Override
     protected boolean areContentsTheSame(@NonNull ArticleBean oldItem, @NonNull ArticleBean newItem) {
-        return oldItem.getChapterName().equals(newItem.getChapterName())
-                && oldItem.getTitle().equals(newItem.getTitle())
-                && oldItem.getNiceDate().equals(newItem.getNiceDate());
+        return oldItem.getTitle().equals(newItem.getTitle());
     }
 
     /**
@@ -63,13 +61,13 @@ public class DiffDemoCallback extends BaseQuickDiffCallback<ArticleBean> {
      */
     @Override
     protected Object getChangePayload(@NonNull ArticleBean oldItem, @NonNull ArticleBean newItem) {
-        if (!oldItem.getTitle().equals(newItem.getTitle())) {
-            // if only title change（如果标题变化了）
-            return HomeDiffAdapter.TITLE_PAYLOAD;
-        } else if (!oldItem.getChapterName().equals(newItem.getChapterName())) {
-            // if only content change（如果内容变化了）
-            return HomeDiffAdapter.CONTENT_PAYLOAD;
-        }
+//        if (!oldItem.getTitle().equals(newItem.getTitle())) {
+//            // if only title change（如果标题变化了）
+//            return HomeDiffAdapter.TITLE_PAYLOAD;
+//        } else if (!oldItem.getChapterName().equals(newItem.getChapterName())) {
+//            // if only content change（如果内容变化了）
+//            return HomeDiffAdapter.CONTENT_PAYLOAD;
+//        }
         return null;
     }
 }

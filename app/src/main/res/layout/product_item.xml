@@ -21,7 +21,7 @@
         <variable name="product"
                   type="com.hhd.wanandroid_mvvm.model.Product"/>
         <variable name="callback"
-                  type="com.hhd.wanandroid_mvvm.ui.ProductClickCallback"/>
+                  type="com.hhd.wanandroid_mvvm.ui.callback.ProductClickCallback"/>
     </data>
 
     <androidx.cardview.widget.CardView

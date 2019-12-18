@@ -16,39 +16,105 @@
 
 package com.hhd.wanandroid_mvvm.ui.adapter;
 
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.TextView;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.hhd.wanandroid_mvvm.R;
+import com.hhd.wanandroid_mvvm.databinding.RecycleItemHomeArticleBinding;
 import com.hhd.wanandroid_mvvm.model.ArticleBean;
-import com.hhd.wanandroid_mvvm.ui.App;
+import com.hhd.wanandroid_mvvm.ui.callback.ArticleClickCallback;
 
-public class HomeAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHolder> {
-    public HomeAdapter() {
-        super(R.layout.item_home2, null);
+import java.util.List;
+
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.RecyclerView;
+
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ArticleViewHolder> {
+
+    List<ArticleBean> mArticleList;
+
+    @Nullable
+    private final ArticleClickCallback mArticleClickCallback;
+
+    public HomeAdapter(@Nullable ArticleClickCallback clickCallback) {
+        mArticleClickCallback = clickCallback;
+        setHasStableIds(true);
+    }
+
+    public void setArticleList(final List<ArticleBean> articleList) {
+//        if (mArticleList == null) {
+//            mArticleList = articleList;
+//            notifyItemRangeInserted(0, articleList.size());
+//        } else {
+//            DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
+//                @Override
+//                public int getOldListSize() {
+//                    return mArticleList.size();
+//                }
+//
+//                @Override
+//                public int getNewListSize() {
+//                    return articleList.size();
+//                }
+//
+//                @Override
+//                public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+//                    LogUtil.i(HomeFragment.TAG,"oldID:" + mArticleList.get(oldItemPosition).getId()
+//                            + "newID:" + articleList.get(newItemPosition).getId()
+//                            + "oldTitle:" + mArticleList.get(oldItemPosition).getTitle()
+//                            + "newTitle:" + articleList.get(newItemPosition).getTitle());
+//                    return mArticleList.get(oldItemPosition).getId() ==
+//                            articleList.get(newItemPosition).getId();
+//                }
+//
+//                @Override
+//                public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+//                    ArticleBean newProduct = articleList.get(newItemPosition);
+//                    ArticleBean oldProduct = mArticleList.get(oldItemPosition);
+//                    return newProduct.getId() == oldProduct.getId()
+//                            && Objects.equals(newProduct.getTitle(), oldProduct.getTitle());
+//                }
+//            });
+//            mArticleList = articleList;
+//            result.dispatchUpdatesTo(this);
+//        }
+
+        mArticleList = articleList;
+            notifyItemRangeInserted(0, articleList.size());
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, ArticleBean item) {
-        if (item != null) {
-            helper.setText(R.id.tv_type, item.getChapterName());
-            helper.setText(R.id.tv_title, item.getTitle());
-            TextView contentTv = helper.getView(R.id.tv_content);
-            //item.getDesc()如果包含标记符<p>，显示出来不好看
-            if (TextUtils.isEmpty(item.getDesc()) || item.getDesc().contains("<p>")) {
-                contentTv.setVisibility(View.GONE);
-            } else {
-                contentTv.setVisibility(View.VISIBLE);
-                contentTv.setText(item.getDesc());
-            }
-
-            helper.setText(R.id.tv_date, item.getNiceDate());
-            String author = App.getInstance().getString(R.string.author) + item.getAuthor();
-            helper.setText(R.id.tv_author, author);
-        }
+    public ArticleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        RecycleItemHomeArticleBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.recycle_item_home_article,
+                parent, false);
+        binding.setCallback(mArticleClickCallback);
+        return new ArticleViewHolder(binding);
     }
 
+    @Override
+    public void onBindViewHolder(ArticleViewHolder holder, int position) {
+        holder.binding.setArticle(mArticleList.get(position));
+        holder.binding.executePendingBindings();
+    }
+
+    @Override
+    public int getItemCount() {
+        return mArticleList == null ? 0 : mArticleList.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return mArticleList.get(position).getId();
+    }
+
+    static class ArticleViewHolder extends RecyclerView.ViewHolder {
+
+        final RecycleItemHomeArticleBinding binding;
+
+        public ArticleViewHolder(RecycleItemHomeArticleBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+    }
 }

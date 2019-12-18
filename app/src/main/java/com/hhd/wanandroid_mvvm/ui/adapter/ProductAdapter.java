@@ -22,7 +22,7 @@ import android.view.ViewGroup;
 import com.hhd.wanandroid_mvvm.R;
 import com.hhd.wanandroid_mvvm.databinding.ProductItemBinding;
 import com.hhd.wanandroid_mvvm.model.Product;
-import com.hhd.wanandroid_mvvm.ui.ProductClickCallback;
+import com.hhd.wanandroid_mvvm.ui.callback.ProductClickCallback;
 
 import java.util.List;
 import java.util.Objects;

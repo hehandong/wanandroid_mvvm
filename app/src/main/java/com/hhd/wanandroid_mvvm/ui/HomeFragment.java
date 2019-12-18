@@ -1,15 +1,16 @@
 package com.hhd.wanandroid_mvvm.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hhd.wanandroid_mvvm.R;
 import com.hhd.wanandroid_mvvm.databinding.FragmentHomeBinding;
 import com.hhd.wanandroid_mvvm.model.ArticleBean;
 import com.hhd.wanandroid_mvvm.ui.adapter.HomeAdapter;
+import com.hhd.wanandroid_mvvm.ui.callback.ArticleClickCallback;
 import com.hhd.wanandroid_mvvm.utils.LogUtil;
 import com.hhd.wanandroid_mvvm.viewmodel.HomeViewModel;
 
@@ -26,7 +27,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class HomeFragment extends Fragment {
 
-    private static final String TAG = "HomeFragment";
+    public static final String TAG = "HomeFragment";
 
     private HomeViewModel mViewModel;
     private FragmentHomeBinding mBinding;
@@ -46,11 +47,11 @@ public class HomeFragment extends Fragment {
 
         initAdapter();
         initRefreshLayout();
-        mBinding.swipeLayout.setRefreshing(true);
 
         subscribeUi(mViewModel.getArticleList());
 
-        LogUtil.i(TAG,"onCreateView");
+        LogUtil.i(TAG, "onCreateView");
+
 
         return mBinding.getRoot();
     }
@@ -58,29 +59,13 @@ public class HomeFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        LogUtil.i(TAG,"onActivityCreated");
+        LogUtil.i(TAG, "onActivityCreated");
     }
 
     private void initAdapter() {
-        mHomeAdapter = new HomeAdapter();
-        mHomeAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
-            @Override
-            public void onLoadMoreRequested() {
-                  mViewModel.updateData();
-            }
-        }, mBinding.productsList);
-        mHomeAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        mHomeAdapter = new HomeAdapter(mProductClickCallback);
         mBinding.productsList.setAdapter(mHomeAdapter);
 
-        mHomeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ArticleBean item = mHomeAdapter.getItem(position);
-                String title = item.getTitle();
-                String link = item.getLink();
-//                ((SupportFragment) getParentFragment()).start(ArticleFragment.newInstance(title, link));
-            }
-        });
     }
 
     private void subscribeUi(LiveData<List<ArticleBean>> liveData) {
@@ -89,10 +74,10 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(@Nullable List<ArticleBean> articleList) {
                 if (articleList != null) {
-                    mBinding.setIsLoading(false);
-                    mHomeAdapter.setNewData(articleList);
+//                    mBinding.setIsLoading(false);
+                    mHomeAdapter.setArticleList(articleList);
                 } else {
-                    mBinding.setIsLoading(true);
+//                    mBinding.setIsLoading(true);
                 }
                 // espresso does not know how to wait for data binding's loop so we execute changes
                 // sync.
@@ -105,14 +90,22 @@ public class HomeFragment extends Fragment {
         mBinding.swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mViewModel.refresh();
-                mHomeAdapter.setEnableLoadMore(true);
-                mBinding.swipeLayout.setRefreshing(false);
+                mViewModel.updateData();
             }
         });
     }
 
 
+    private final ArticleClickCallback mProductClickCallback = new ArticleClickCallback() {
+        @Override
+        public void onClick(ArticleBean article) {
+
+//            if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
+//                ((MainActivity) getActivity()).show(product);
+//            }
+            Log.i("ProductListFragment", "mProductClickCallback");
+        }
+    };
 
 
 }

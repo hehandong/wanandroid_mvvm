@@ -18,4 +18,6 @@
     <string name="action_share">分享</string>
     <string name="hot_news">热门新闻</string>
     <string name="author">作者:</string>
+
+    <string name="article_author">作者: $%s</string>
 </resources>

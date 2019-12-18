@@ -1,4 +1,4 @@
-package com.hhd.wanandroid_mvvm.ui;
+package com.hhd.wanandroid_mvvm.ui.temp;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +16,8 @@ import com.hhd.wanandroid_mvvm.model.Product;
 import com.hhd.wanandroid_mvvm.net.WanAndroidManager;
 import com.hhd.wanandroid_mvvm.net.costomCore.CustomObserver;
 import com.hhd.wanandroid_mvvm.net.module.WanBaseModel;
-import com.hhd.wanandroid_mvvm.ui.adapter.HomeAdapter;
+import com.hhd.wanandroid_mvvm.ui.App;
+import com.hhd.wanandroid_mvvm.ui.callback.ProductClickCallback;
 import com.hhd.wanandroid_mvvm.utils.LogUtil;
 import com.hhd.wanandroid_mvvm.utils.ToastUtil;
 import com.hhd.wanandroid_mvvm.viewmodel.HomeViewModel;
@@ -36,7 +37,7 @@ public class Home2Fragment extends Fragment {
 
     private HomeViewModel mViewModel;
     private FragmentHomeBinding mBinding;
-    private HomeAdapter mHomeAdapter;
+    private Home2Adapter mHome2Adapter;
 
     private boolean mAtTop = true;
     private static final int PAGE_SIZE = 6;
@@ -69,20 +70,20 @@ public class Home2Fragment extends Fragment {
     }
 
     private void initAdapter() {
-        mHomeAdapter = new HomeAdapter();
-        mHomeAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+        mHome2Adapter = new Home2Adapter();
+        mHome2Adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
                 updateUI();
             }
         }, mBinding.productsList);
-        mHomeAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
-        mBinding.productsList.setAdapter(mHomeAdapter);
+        mHome2Adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        mBinding.productsList.setAdapter(mHome2Adapter);
 
-        mHomeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        mHome2Adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ArticleBean item = mHomeAdapter.getItem(position);
+                ArticleBean item = mHome2Adapter.getItem(position);
                 String title = item.getTitle();
                 String link = item.getLink();
 //                ((SupportFragment) getParentFragment()).start(ArticleFragment.newInstance(title, link));
@@ -104,7 +105,7 @@ public class Home2Fragment extends Fragment {
     private void refresh() {
         mNextRequestPage = 0;
         //这里的作用是防止下拉刷新的时候还可以上拉加载
-        mHomeAdapter.setEnableLoadMore(false);
+        mHome2Adapter.setEnableLoadMore(false);
         // Init Datas
         updateUI();
     }
@@ -121,7 +122,7 @@ public class Home2Fragment extends Fragment {
                             boolean isRefresh = mNextRequestPage == 0;
                             setData(isRefresh, datas);
                             if (isRefresh) {
-                                mHomeAdapter.setEnableLoadMore(true);
+                                mHome2Adapter.setEnableLoadMore(true);
                                 mBinding.swipeLayout.setRefreshing(false);
                             }
                         }
@@ -133,10 +134,10 @@ public class Home2Fragment extends Fragment {
                         ToastUtil.showToastLong(App.getInstance(),"ERROR");
                         boolean isRefresh = mNextRequestPage == 0;
                         if (isRefresh) {
-                            mHomeAdapter.setEnableLoadMore(true);
+                            mHome2Adapter.setEnableLoadMore(true);
                             mBinding.swipeLayout.setRefreshing(false);
                         } else {
-                            mHomeAdapter.loadMoreFail();
+                            mHome2Adapter.loadMoreFail();
                         }
                     }
                 });
@@ -147,19 +148,19 @@ public class Home2Fragment extends Fragment {
         mNextRequestPage++;
         final int size = data == null ? 0 : data.size();
         if (isRefresh) {
-            mHomeAdapter.setNewData(data);
+            mHome2Adapter.setNewData(data);
         } else {
             if (size > 0) {
-                mHomeAdapter.addData(data);
+                mHome2Adapter.addData(data);
             }
         }
 
         if (size < PAGE_SIZE) {
             //第一页如果不够一页就不显示没有更多数据布局
-            mHomeAdapter.loadMoreEnd(isRefresh);
+            mHome2Adapter.loadMoreEnd(isRefresh);
             ToastUtil.showToastLong(App.getInstance(),"no more data");
         } else {
-            mHomeAdapter.loadMoreComplete();
+            mHome2Adapter.loadMoreComplete();
         }
     }
 
@@ -171,7 +172,7 @@ public class Home2Fragment extends Fragment {
 //            public void onChanged(@Nullable List<ProductEntity> myProducts) {
 //                if (myProducts != null) {
 ////                    mBinding.setIsLoading(false);
-//                    mHomeAdapter.setProductList(myProducts);
+//                    mHome2Adapter.setArticleList(myProducts);
 //                } else {
 ////                    mBinding.setIsLoading(true);
 //                }
